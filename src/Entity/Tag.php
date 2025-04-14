@@ -7,7 +7,7 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\TagRespository")
+ * @ORM\Entity(repositoryClass="App\Repository\TagRepository")
  * @ORM\HasLifecycleCallbacks()
  */
 class Tag {

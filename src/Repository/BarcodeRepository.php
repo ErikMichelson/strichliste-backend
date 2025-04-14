@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Barcode;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method Barcode|null find($id, $lockMode = null, $lockVersion = null)
@@ -12,9 +12,9 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @method Barcode[]    findAll()
  * @method Barcode[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class BarcodeRespository extends ServiceEntityRepository {
+class BarcodeRepository extends ServiceEntityRepository {
 
-    function __construct(RegistryInterface $registry) {
+    function __construct(ManagerRegistry $registry) {
         parent::__construct($registry, Barcode::class);
     }
 

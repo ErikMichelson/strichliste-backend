@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\UniqueConstraint;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\BarcodeRespository")
+ * @ORM\Entity(repositoryClass="App\Repository\BarcodeRepository")
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Table(name="barcode", uniqueConstraints={
  *     @UniqueConstraint(name="barcode", columns={"barcode"})
