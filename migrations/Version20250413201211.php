@@ -23,10 +23,10 @@ final class Version20250413201211 extends AbstractMigration
                 $this->addSql('CREATE TABLE article_tag (id SERIAL PRIMARY KEY, article_id INT DEFAULT NULL, tag_id INT DEFAULT NULL, created TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL)');
                 $this->addSql('CREATE INDEX IDX_919694F97294869C ON article_tag (article_id)');
                 $this->addSql('CREATE INDEX IDX_919694F9BAD26311 ON article_tag (tag_id)');
-                $this->addSql('CREATE UNIQUE INDEX article_tag ON article_tag (article_id, tag_id)');
+                $this->addSql('CREATE UNIQUE INDEX article_tag_unique_idx ON article_tag (article_id, tag_id)');
                 $this->addSql('CREATE TABLE barcode (id SERIAL PRIMARY KEY, article_id INT DEFAULT NULL, barcode VARCHAR(32) NOT NULL, created TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL)');
                 $this->addSql('CREATE INDEX IDX_97AE02667294869C ON barcode (article_id)');
-                $this->addSql('CREATE UNIQUE INDEX barcode ON barcode (barcode)');
+                $this->addSql('CREATE UNIQUE INDEX barcode_unique_idx ON barcode (barcode)');
                 $this->addSql('CREATE TABLE tag (id SERIAL PRIMARY KEY, tag VARCHAR(255) NOT NULL, created TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL)');
                 $this->addSql('CREATE TABLE transactions (id SERIAL PRIMARY KEY, user_id INT NOT NULL, article_id INT DEFAULT NULL, recipient_transaction_id INT DEFAULT NULL, sender_transaction_id INT DEFAULT NULL, quantity INT DEFAULT NULL, comment VARCHAR(255) DEFAULT NULL, amount INT NOT NULL, deleted BOOLEAN NOT NULL, created TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL)');
                 $this->addSql('CREATE INDEX IDX_EAA81A4CA76ED395 ON transactions (user_id)');
@@ -51,10 +51,10 @@ final class Version20250413201211 extends AbstractMigration
                 $this->addSql('CREATE TABLE article_tag (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, article_id INTEGER DEFAULT NULL, tag_id INTEGER DEFAULT NULL, created DATETIME NOT NULL)');
                 $this->addSql('CREATE INDEX IDX_919694F97294869C ON article_tag (article_id)');
                 $this->addSql('CREATE INDEX IDX_919694F9BAD26311 ON article_tag (tag_id)');
-                $this->addSql('CREATE UNIQUE INDEX article_tag ON article_tag (article_id, tag_id)');
+                $this->addSql('CREATE UNIQUE INDEX article_tag_unique_idx ON article_tag (article_id, tag_id)');
                 $this->addSql('CREATE TABLE barcode (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, article_id INTEGER DEFAULT NULL, barcode VARCHAR(32) NOT NULL, created DATETIME NOT NULL)');
                 $this->addSql('CREATE INDEX IDX_97AE02667294869C ON barcode (article_id)');
-                $this->addSql('CREATE UNIQUE INDEX barcode ON barcode (barcode)');
+                $this->addSql('CREATE UNIQUE INDEX barcode_unique_idx ON barcode (barcode)');
                 $this->addSql('CREATE TABLE tag (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, tag VARCHAR(255) NOT NULL, created DATETIME NOT NULL)');
                 $this->addSql('CREATE TABLE transactions (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, user_id INTEGER NOT NULL, article_id INTEGER DEFAULT NULL, recipient_transaction_id INTEGER DEFAULT NULL, sender_transaction_id INTEGER DEFAULT NULL, quantity INTEGER DEFAULT NULL, comment VARCHAR(255) DEFAULT NULL, amount INTEGER NOT NULL, deleted BOOLEAN NOT NULL, created DATETIME NOT NULL)');
                 $this->addSql('CREATE INDEX IDX_EAA81A4CA76ED395 ON transactions (user_id)');
@@ -67,8 +67,8 @@ final class Version20250413201211 extends AbstractMigration
                 break;
             case 'mysql':
                 $this->addSql('CREATE TABLE article (id INT AUTO_INCREMENT PRIMARY KEY, precursor_id INT DEFAULT NULL, name VARCHAR(255) NOT NULL, amount INT NOT NULL, active TINYINT(1) NOT NULL, created DATETIME NOT NULL, usage_count INT NOT NULL, UNIQUE INDEX UNIQ_23A0E66FA546BCC (precursor_id)) DEFAULT CHARACTER SET UTF8 COLLATE `UTF8_unicode_ci` ENGINE = InnoDB');
-                $this->addSql('CREATE TABLE article_tag (id INT AUTO_INCREMENT PRIMARY KEY, article_id INT DEFAULT NULL, tag_id INT DEFAULT NULL, created DATETIME NOT NULL, INDEX IDX_919694F97294869C (article_id), INDEX IDX_919694F9BAD26311 (tag_id), UNIQUE INDEX article_tag (article_id, tag_id)) DEFAULT CHARACTER SET UTF8 COLLATE `UTF8_unicode_ci` ENGINE = InnoDB');
-                $this->addSql('CREATE TABLE barcode (id INT AUTO_INCREMENT PRIMARY KEY, article_id INT DEFAULT NULL, barcode VARCHAR(32) NOT NULL, created DATETIME NOT NULL, INDEX IDX_97AE02667294869C (article_id), UNIQUE INDEX barcode (barcode)) DEFAULT CHARACTER SET UTF8 COLLATE `UTF8_unicode_ci` ENGINE = InnoDB');
+                $this->addSql('CREATE TABLE article_tag (id INT AUTO_INCREMENT PRIMARY KEY, article_id INT DEFAULT NULL, tag_id INT DEFAULT NULL, created DATETIME NOT NULL, INDEX IDX_919694F97294869C (article_id), INDEX IDX_919694F9BAD26311 (tag_id), UNIQUE INDEX article_tag_unique_idx (article_id, tag_id)) DEFAULT CHARACTER SET UTF8 COLLATE `UTF8_unicode_ci` ENGINE = InnoDB');
+                $this->addSql('CREATE TABLE barcode (id INT AUTO_INCREMENT PRIMARY KEY, article_id INT DEFAULT NULL, barcode VARCHAR(32) NOT NULL, created DATETIME NOT NULL, INDEX IDX_97AE02667294869C (article_id), UNIQUE INDEX barcode_unique_idx (barcode)) DEFAULT CHARACTER SET UTF8 COLLATE `UTF8_unicode_ci` ENGINE = InnoDB');
                 $this->addSql('CREATE TABLE tag (id INT AUTO_INCREMENT PRIMARY KEY, tag VARCHAR(255) NOT NULL, created DATETIME NOT NULL) DEFAULT CHARACTER SET UTF8 COLLATE `UTF8_unicode_ci` ENGINE = InnoDB');
                 $this->addSql('CREATE TABLE transactions (id INT AUTO_INCREMENT PRIMARY KEY, user_id INT NOT NULL, article_id INT DEFAULT NULL, recipient_transaction_id INT DEFAULT NULL, sender_transaction_id INT DEFAULT NULL, quantity INT DEFAULT NULL, comment VARCHAR(255) DEFAULT NULL, amount INT NOT NULL, deleted TINYINT(1) NOT NULL, created DATETIME NOT NULL, INDEX IDX_EAA81A4CA76ED395 (user_id), INDEX IDX_EAA81A4C7294869C (article_id), UNIQUE INDEX UNIQ_EAA81A4C87F3EDB8 (recipient_transaction_id), UNIQUE INDEX UNIQ_EAA81A4CFE2C36CC (sender_transaction_id)) DEFAULT CHARACTER SET UTF8 COLLATE `UTF8_unicode_ci` ENGINE = InnoDB');
                 $this->addSql('CREATE TABLE `user` (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(64) NOT NULL, email VARCHAR(255) DEFAULT NULL, balance INT NOT NULL, disabled TINYINT(1) NOT NULL, created DATETIME NOT NULL, updated DATETIME DEFAULT NULL, UNIQUE INDEX UNIQ_8D93D6495E237E06 (name), INDEX disabled_updated (disabled, updated)) DEFAULT CHARACTER SET UTF8 COLLATE `UTF8_unicode_ci` ENGINE = InnoDB');
